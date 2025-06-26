@@ -1,515 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="description" content="Far Eastern Memorial Hospital AI Research Team - Advancing Medical AI and Clinical Decision Support">
-  <meta property="og:title" content="FEMH AI Research Team"/>
-  <meta property="og:description" content="Leading research in medical AI, clinical decision support, and healthcare innovation"/>
-  <meta property="og:url" content="https://femh-ai.github.io"/>
-  <meta property="og:image" content="static/images/femh_banner.png" />
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-  <meta name="twitter:title" content="FEMH AI Research Team">
-  <meta name="twitter:description" content="Advancing Medical AI and Clinical Decision Support at Far Eastern Memorial Hospital">
-  <meta name="twitter:image" content="static/images/femh_twitter.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="keywords" content="Medical AI, Healthcare Innovation, Clinical Decision Support, Far Eastern Memorial Hospital, AI Research">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="description"
+        content="Far Eastern Memorial Hospital AI Research Team - Advancing Medical AI and Clinical Decision Support">
+    <meta property="og:title" content="FEMH AI Research Team" />
+    <meta property="og:description"
+        content="Leading research in medical AI, clinical decision support, and healthcare innovation" />
+    <meta property="og:url" content="https://femh-ai.github.io" />
+    <meta property="og:image" content="static/images/femh_banner.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:title" content="FEMH AI Research Team">
+    <meta name="twitter:description"
+        content="Advancing Medical AI and Clinical Decision Support at Far Eastern Memorial Hospital">
+    <meta name="twitter:image" content="static/images/femh_twitter.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="keywords"
+        content="Medical AI, Healthcare Innovation, Clinical Decision Support, Far Eastern Memorial Hospital, AI Research">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>FEMH AI Research Team</title>
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --primary-color: #00a86b;
-      --secondary-color: #0f172a;
-      --accent-color: #06b6d4;
-      --text-primary: #1e293b;
-      --text-secondary: #64748b;
-      --bg-primary: #ffffff;
-      --bg-secondary: #f8fafc;
-      --border-color: #e2e8f0;
-      --success-color: #10b981;
-      --gradient-1: linear-gradient(135deg, #00a86b 0%, #00d084 100%);
-      --gradient-2: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    }
+    <title>FEMH AI Research Team</title>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <style>
+        :root {
+            --primary-color: #00a86b;
+            --secondary-color: #0f172a;
+            --accent-color: #06b6d4;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --gradient-1: linear-gradient(135deg, #00a86b 0%, #00d084 100%);
+            --gradient-2: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      color: var(--text-primary);
-      background: var(--bg-primary);
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
 
-    /* Navigation */
-    .navbar {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border-color);
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 1rem 0;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
 
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--primary-color);
-      text-decoration: none;
-    }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .nav-menu {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
 
-    .nav-link {
-      color: var(--text-primary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
 
-    .nav-link:hover {
-      color: var(--primary-color);
-    }
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
 
-    /* Hero Section */
-    .hero {
-      background: var(--gradient-1);
-      color: white;
-      padding: 140px 0 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-      animation: float 20s ease-in-out infinite;
-    }
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-1);
+            color: white;
+            padding: 140px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
 
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
+        @keyframes float {
 
-    .hero-logo {
-      margin-bottom: 2rem;
-    }
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
 
-    .title {
-      font-size: 3.5rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-    }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
 
-    .subtitle {
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
 
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 12px 24px;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
+        .hero-logo {
+            margin-bottom: 2rem;
+        }
 
-    .cta-button:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-    }
+        .title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
 
-    /* Section Styling */
-    .section {
-      padding: 80px 0;
-    }
+        .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    .section-light {
-      background: var(--bg-secondary);
-    }
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
 
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 3rem;
-      color: var(--text-primary);
-    }
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
 
-    .section-subtitle {
-      font-size: 1.2rem;
-      text-align: center;
-      color: var(--text-secondary);
-      margin-bottom: 4rem;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+        }
 
-    /* Hospital Info */
-    .hospital-info {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
-      margin-bottom: 4rem;
-    }
+        .section-light {
+            background: var(--bg-secondary);
+        }
 
-    .info-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      border: 1px solid var(--border-color);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
 
-    .info-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
-    }
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    .info-icon {
-      width: 60px;
-      height: 60px;
-      background: var(--gradient-1);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
-    }
+        /* Hospital Info */
+        .hospital-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
 
-    .info-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-    }
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .info-description {
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+        }
 
-    /* Team Section */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 4rem;
-    }
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
 
-    .team-card {
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
-      border: 1px solid var(--border-color);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+        .info-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
 
-    .team-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px -3px rgba(0, 0, 0, 0.15);
-    }
+        .info-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
 
-    .team-avatar {
-      width: 100%;
-      height: 200px;
-      background: var(--gradient-2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      color: white;
-    }
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
 
-    .team-info {
-      padding: 1.5rem;
-    }
+        .team-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .team-name {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
-    }
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -3px rgba(0, 0, 0, 0.15);
+        }
 
-    .team-role {
-      color: var(--primary-color);
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
+        .team-avatar {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
 
-    .team-quote {
-      color: var(--text-secondary);
-      font-style: italic;
-      line-height: 1.5;
-    }
+        .team-info {
+            padding: 1.5rem;
+        }
 
-    /* Publications Section */
-    .publications-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-    }
+        .team-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
 
-    .publication-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      border: 1px solid var(--border-color);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
+        .team-role {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
 
-    .publication-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: var(--primary-color);
-    }
+        .team-quote {
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.5;
+        }
 
-    .publication-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 35px -3px rgba(0, 0, 0, 0.15);
-    }
+        /* Publications Section */
+        .publications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
 
-    .publication-badge {
-      display: inline-block;
-      background: var(--primary-color);
-      color: white;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
+        .publication-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .publication-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-      line-height: 1.3;
-    }
+        .publication-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-color);
+        }
 
-    .publication-authors {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-    }
+        .publication-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px -3px rgba(0, 0, 0, 0.15);
+        }
 
-    .publication-description {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
+        .publication-badge {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
 
-    .publication-links {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
+        .publication-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
 
-    .publication-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      padding: 6px 12px;
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
+        .publication-authors {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
 
-    .publication-link:hover {
-      background: var(--primary-color);
-      color: white;
-    }
+        .publication-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
 
-    /* Footer */
-    .footer {
-      background: var(--secondary-color);
-      color: white;
-      padding: 3rem 0;
-      text-align: center;
-    }
+        .publication-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
 
-    .footer-content {
-      opacity: 0.8;
-      line-height: 1.6;
-    }
+        .publication-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 6px 12px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
 
-    .footer-link {
-      color: var(--primary-color);
-      text-decoration: none;
-    }
+        .publication-link:hover {
+            background: var(--primary-color);
+            color: white;
+        }
 
-    .footer-link:hover {
-      text-decoration: underline;
-    }
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .nav-menu {
-        display: none;
-      }
-      
-      .title {
-        font-size: 2.5rem;
-      }
-      
-      .section {
-        padding: 60px 0;
-      }
-      
-      .hospital-info,
-      .team-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+        .footer-content {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .hospital-info,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="container">
-      <div class="nav-container">
-        <a href="#" class="nav-logo">
-          <img src="static/images/femh_logo.png" alt="FEMH Logo" style="height: 40px;">
-          FEMH AI Research
-        </a>
-        <ul class="nav-menu">
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#team" class="nav-link">Team</a></li>
-          <li><a href="#publications" class="nav-link">Publications</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="nav-logo">
+                    <img src="static/images/femh_logo.png" alt="FEMH Logo" style="height: 40px;">
+                    FEMH AI Research
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <!-- <li><a href="#team" class="nav-link">Team</a></li> -->
+                    <li><a href="#publications" class="nav-link">Publications</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-logo">
-          <img src="static/images/femh_logo.png" alt="FEMH Logo" style="height: 120px;">
-        </div>
-        
-        <h1 class="title">FEMH AI Research Team</h1>
-        <p class="subtitle">
-          Advancing Medical Artificial Intelligence and Clinical Decision Support at Far Eastern Memorial Hospital
-        </p>
-        
-        <a href="#publications" class="cta-button">
-          🔬 Explore Our Research
-        </a>
-      </div>
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-logo">
+                    <img src="static/images/femh_logo.png" alt="FEMH Logo" style="height: 200px;">
+                </div>
 
-  <!-- About Section -->
-  <section class="section" id="about">
-    <div class="container">
-      <h2 class="section-title">About Far Eastern Memorial Hospital</h2>
-      <p class="section-subtitle">
-        A leading medical institution committed to excellence in healthcare, research, and innovation
-      </p>
-      
-      <div class="hospital-info">
-        <div class="info-card">
-          <div class="info-icon">🏥</div>
-          <h3 class="info-title">Excellence in Healthcare</h3>
-          <p class="info-description">
-            Far Eastern Memorial Hospital has been serving the community for over three decades, providing comprehensive medical care with state-of-the-art facilities and cutting-edge technology. Our commitment to patient-centered care has made us one of Taiwan's most trusted healthcare institutions.
-          </p>
-        </div>
-        
-        <div class="info-card">
-          <div class="info-icon">🔬</div>
-          <h3 class="info-title">Research & Innovation</h3>
-          <p class="info-description">
-            Our hospital is at the forefront of medical research, with particular expertise in oncology, cardiology, and now artificial intelligence in healthcare. We collaborate with leading universities and research institutions to advance medical knowledge and improve patient outcomes.
-          </p>
-        </div>
-        
-        <div class="info-card">
-          <div class="info-icon">🌟</div>
-          <h3 class="info-title">AI-Driven Future</h3>
-          <p class="info-description">
-            The FEMH AI Research Team represents our commitment to integrating artificial intelligence into clinical practice. We focus on developing AI solutions that enhance diagnostic accuracy, streamline clinical workflows, and ultimately improve patient care quality.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+                <h1 class="title">FEMH AI Research Team</h1>
+                <p class="subtitle">
+                    Advancing Medical Artificial Intelligence at Far Eastern Memorial Hospital
+                </p>
 
-  <!-- Team Section -->
-  <section class="section section-light" id="team">
+                <a href="#publications" class="cta-button">
+                    🔬 Explore Our Research
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">About Far Eastern Memorial Hospital</h2>
+            <p class="section-subtitle">
+                A leading medical institution committed to excellence in healthcare and research
+            </p>
+
+            <div class="hospital-info">
+                <div class="info-card">
+                    <div class="info-icon">🏥</div>
+                    <h3 class="info-title">Excellence in Healthcare</h3>
+                    <p class="info-description">
+                        Far Eastern Memorial Hospital has been serving the community for over three decades, providing
+                        comprehensive medical care with state-of-the-art facilities and cutting-edge technology. Our
+                        commitment to patient-centered care has made us one of Taiwan's most trusted healthcare
+                        institutions.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">🔬</div>
+                    <h3 class="info-title">Research & Innovation</h3>
+                    <p class="info-description">
+                        Our hospital is at the forefront of medical research. We collaborate with leading universities
+                        and research institutions to advance medical knowledge and improve patient outcomes.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">🌟</div>
+                    <h3 class="info-title">AI-Driven Future</h3>
+                    <p class="info-description">
+                        The FEMH AI Research Team represents our commitment to integrating artificial intelligence into
+                        clinical practice. We focus on developing AI solutions that enhance diagnostic accuracy,
+                        streamline clinical workflows, and ultimately improve patient care quality.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <!-- <section class="section section-light" id="team">
     <div class="container">
       <h2 class="section-title">Our Research Team</h2>
       <p class="section-subtitle">
@@ -520,7 +539,7 @@
         <div class="team-card">
           <div class="team-avatar">👨‍⚕️</div>
           <div class="team-info">
-            <h3 class="team-name">Dr. Chen Wei-Ming</h3>
+            <h3 class="team-name">Dr. Fang-Ming Hung</h3>
             <p class="team-role">Principal Investigator & Director</p>
             <p class="team-quote">
               "Our mission is to bridge the gap between cutting-edge AI research and practical clinical applications. We believe AI should augment, not replace, the human touch in medicine."
@@ -551,119 +570,154 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
-  <!-- Publications Section -->
-  <section class="section" id="publications">
-    <div class="container">
-      <h2 class="section-title">Publications & Research</h2>
-      <p class="section-subtitle">
-        Our latest contributions to the field of medical artificial intelligence
-      </p>
-      
-      <div class="publications-grid">
-        <div class="publication-card">
-          <div class="publication-badge">ACL'25 Industry Track</div>
-          <h3 class="publication-title">MedPlan: A Two-Stage RAG-Based System for Personalized Medical Plan Generation</h3>
-          <p class="publication-authors">
-            Hsin-Ling Hsu*, Cong-Tinh Dao*, Luning Wang, Zitao Shuai, Nguyen Minh Thao Phan, Jun-En Ding, Chun-Chieh Liao, Pengfei Hu, Xiaoxue Han, Chih-Ho Hsu, Dongsheng Luo, Wen-Chih Peng, Feng Liu, Fang-Ming Hung, Chenwei Wu
-          </p>
-          <p class="publication-description">
-            A novel framework that structures LLM reasoning to align with real-life clinician workflows using SOAP methodology. Our two-stage approach significantly outperforms baseline methods in both assessment accuracy and treatment plan quality.
-          </p>
-          <div class="publication-links">
-            <a href="medplan.html" class="publication-link">🔗 Project Page</a>
-            <a href="https://arxiv.org/abs/2503.17900" class="publication-link">📄 Paper</a>
-            <a href="https://github.com/JustinHsu1019/MedPlan" class="publication-link">💻 Code</a>
-            <a href="http://justforpublicuse.com/" class="publication-link">🚀 Demo</a>
-          </div>
+    <!-- Publications Section -->
+    <section class="section" id="publications">
+        <div class="container">
+            <h2 class="section-title">Publications & Research</h2>
+            <p class="section-subtitle">
+                Our latest contributions to the field of medical artificial intelligence
+            </p>
+
+            <div class="publications-grid">
+                <div class="publication-card">
+                    <div class="publication-badge">ACL'25 Industry Track</div>
+                    <h3 class="publication-title">MedPlan: A Two-Stage RAG-Based System for Personalized Medical Plan
+                        Generation</h3>
+                    <p class="publication-authors">
+                        Hsin-Ling Hsu*, Cong-Tinh Dao*, Luning Wang, Zitao Shuai, Nguyen Minh Thao Phan, Jun-En Ding,
+                        Chun-Chieh Liao, Pengfei Hu, Xiaoxue Han, Chih-Ho Hsu, Dongsheng Luo, Wen-Chih Peng, Feng Liu,
+                        Fang-Ming Hung, Chenwei Wu
+                    </p>
+                    <p class="publication-description">
+                        A novel framework that structures LLM reasoning to align with real-life clinician workflows
+                        using SOAP methodology. Our two-stage approach significantly outperforms baseline methods in
+                        both assessment accuracy and treatment plan quality.
+                    </p>
+                    <div class="publication-links">
+                        <a href="medplan.html" class="publication-link">🔗 Project Page</a>
+                        <a href="https://arxiv.org/abs/2503.17900" class="publication-link">📄 Paper</a>
+                        <a href="https://github.com/JustinHsu1019/MedPlan" class="publication-link">💻 Code</a>
+                        <a href="http://justforpublicuse.com/" class="publication-link">🚀 Demo</a>
+                    </div>
+                </div>
+
+                <div class="publication-card">
+                    <div class="publication-badge">CIKM'24</div>
+                    <h3 class="publication-title">MEDFuse: Multimodal EHR Data Fusion with Masked Lab-Test Modeling and
+                        Large Language Models</h3>
+                    <p class="publication-authors">
+                        Phan Nguyen Minh Thao, Cong-Tinh Dao, Chenwei Wu, Jian-Zhe Wang, Shun Liu, Jun-En Ding, David
+                        Restrepo, Feng Liu, Fang-Ming Hung, Wen-Chih Peng
+                    </p>
+                    <p class="publication-description">
+                        A comprehensive multimodal framework for EHR data fusion that combines masked lab-test modeling
+                        with large language models to improve clinical prediction tasks and enhance healthcare
+                        decision-making processes.
+                    </p>
+                    <div class="publication-links">
+                        <a href="medfuse.html" class="publication-link">🔗 Project Page</a>
+                        <a href="https://arxiv.org/pdf/2407.12309" class="publication-link">📄 Paper</a>
+                        <a href="https://doi.org/10.1145/3627673.3679962" class="publication-link">🔗 DOI</a>
+                    </div>
+                </div>
+
+                <div class="publication-card">
+                    <div class="publication-badge">CIKM'24</div>
+                    <h3 class="publication-title">EHR-Based Mobile and Web Platform for Chronic Disease Risk Prediction
+                        Using Large Language Multimodal Models</h3>
+                    <p class="publication-authors">
+                        Chun-Chieh Liao, Wei-Ting Kuo, I-Hsuan Hu, Yen-Chen Shih, Jun-En Ding, Feng Liu, Fang-Ming Hung
+                    </p>
+                    <p class="publication-description">
+                        An innovative mobile and web platform that leverages large language multimodal models for
+                        chronic disease risk prediction, providing accessible and accurate health assessment tools for
+                        both healthcare providers and patients.
+                    </p>
+                    <div class="publication-links">
+                        <a href="ehr.html" class="publication-link">🔗 Project Page</a>
+                        <a href="https://arxiv.org/pdf/2406.18087" class="publication-link">📄 Paper</a>
+                        <a href="https://doi.org/10.1145/3627673.3679227" class="publication-link">🔗 DOI</a>
+                        <a href="https://www.youtube.com/watch?v=oqmL9DEDFgA&ab_channel=JackLiao"
+                            class="publication-link">🎥 Demo</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <!-- Placeholder for future publications -->
-        <div class="publication-card" style="opacity: 0.6; border-style: dashed;">
-          <div class="publication-badge" style="background: var(--text-secondary);">Coming Soon</div>
-          <h3 class="publication-title">Future Research Projects</h3>
-          <p class="publication-authors">FEMH AI Research Team</p>
-          <p class="publication-description">
-            We are continuously working on new projects in medical AI, including diagnostic imaging analysis, clinical prediction models, and advanced natural language processing for healthcare applications.
-          </p>
-          <div class="publication-links">
-            <a href="#contact" class="publication-link">📧 Stay Updated</a>
-          </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Get in Touch</h3>
+                <p>
+                    Interested in collaborating or learning more about our research?<br>
+                    We welcome partnerships with academic institutions, industry partners, and fellow researchers.
+                </p>
+                <p style="margin-top: 1.5rem;">
+                    <strong>Far Eastern Memorial Hospital AI Research Team</strong><br>
+                    📧 <a href="mailto:philip@mail.femh.org.tw" class="footer-link">philip@mail.femh.org.tw</a><br>
+                    🏥 <a href="https://www.femh.org.tw" class="footer-link">www.femh.org.tw</a><br>
+                    📍 New Taipei City, Taiwan
+                </p>
+                <p
+                    style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.6;">
+                    © 2025 Far Eastern Memorial Hospital AI Research Team. All rights reserved.
+                </p>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- Footer -->
-  <footer class="footer" id="contact">
-    <div class="container">
-      <div class="footer-content">
-        <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Get in Touch</h3>
-        <p>
-          Interested in collaborating or learning more about our research?<br>
-          We welcome partnerships with academic institutions, industry partners, and fellow researchers.
-        </p>
-        <p style="margin-top: 1.5rem;">
-          <strong>Far Eastern Memorial Hospital AI Research Team</strong><br>
-          📧 <a href="mailto:ai-research@femh.org.tw" class="footer-link">ai-research@femh.org.tw</a><br>
-          🏥 <a href="https://www.femh.org.tw" class="footer-link">www.femh.org.tw</a><br>
-          📍 New Taipei City, Taiwan
-        </p>
-        <p style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.6;">
-          © 2025 Far Eastern Memorial Hospital AI Research Team. All rights reserved.
-        </p>
-      </div>
-    </div>
-  </footer>
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-  <script>
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-    // Add animation on scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
+        // Observe all cards for animation
+        document.querySelectorAll('.info-card, .team-card, .publication-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
 
-    // Observe all cards for animation
-    document.querySelectorAll('.info-card, .team-card, .publication-card').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
-
-    // Navigation background on scroll
-    window.addEventListener('scroll', () => {
-      const navbar = document.querySelector('.navbar');
-      if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-      } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-      }
-    });
-  </script>
+        // Navigation background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
 </body>
+
 </html>

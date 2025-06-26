@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description"
+        content="EHR-Based Mobile and Web Platform for Chronic Disease Risk Prediction Using Large Language Multimodal Models">
+    <meta property="og:title" content="EHR-Based Mobile and Web Platform for Chronic Disease Risk Prediction" />
+    <meta property="og:description"
+        content="An innovative platform leveraging LLMMs for accessible chronic disease risk prediction" />
+    <meta property="og:url" content="https://example.com/ehr-platform" />
+    <meta property="og:image" content="static/images/ehr_banner.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:title" content="EHR-Based Mobile and Web Platform">
+    <meta name="twitter:description"
+        content="Large Language Multimodal Models for chronic disease prediction on mobile and web platforms">
+    <meta name="twitter:image" content="static/images/ehr_twitter.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="keywords"
+        content="Electronic Health Records, Mobile Health, Large Language Models, Chronic Disease Prediction, Multimodal AI, Healthcare Technology">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>EHR-Based Mobile and Web Platform for Chronic Disease Risk Prediction</title>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0ea5e9;
+            --secondary-color: #1e293b;
+            --accent-color: #06b6d4;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --medical-blue: #2563eb;
+            --medical-green: #059669;
+            --gradient-1: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            --gradient-2: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+            --gradient-3: linear-gradient(135deg, #34d399 0%, #059669 100%);
+            --gradient-medical: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-medical);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="medical-pattern" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="1" fill="white" opacity="0.1"/><circle cx="37.5" cy="37.5" r="1" fill="white" opacity="0.1"/><rect x="20" y="20" width="10" height="2" fill="white" opacity="0.05"/><rect x="24" y="16" width="2" height="10" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23medical-pattern)"/></svg>');
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .conference-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+
+        .authors {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .author-link {
+            color: #e2e8f0;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .author-link:hover {
+            border-bottom-color: #e2e8f0;
+        }
+
+        .institution {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-primary);
+            color: var(--medical-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-light {
+            background: var(--bg-secondary);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Abstract Section */
+        .abstract-content {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient-1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Performance Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-3);
+        }
+
+        .metric-card:hover {
+            border-color: var(--medical-green);
+            transform: translateY(-4px);
+        }
+
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--medical-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-description {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Platform Demo */
+        .demo-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        .demo-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .demo-tab {
+            padding: 12px 24px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .demo-tab.active {
+            color: var(--medical-blue);
+            border-bottom-color: var(--medical-blue);
+        }
+
+        .demo-content {
+            display: none;
+        }
+
+        .demo-content.active {
+            display: block;
+        }
+
+        .demo-image {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Architecture Section */
+        .architecture-overview {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .architecture-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--medical-blue);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: var(--medical-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Citation Section */
+        .citation-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-link {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.2rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 200px;
+                justify-content: center;
+            }
+
+            .demo-tabs {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <!-- FEMH Logo -->
+                <img src="static/images/femh_logo.png" alt="FEMH Logo" style="height: 200px;">
+
+                <h1 class="title">EHR-Based Mobile and Web Platform</h1>
+                <p class="subtitle">for Chronic Disease Risk Prediction Using Large Language Multimodal Models</p>
+
+                <div class="conference-badge">
+                    📋 CIKM'24 - ACM International Conference on Information and Knowledge Management
+                </div>
+
+                <div class="authors">
+                    <span class="author-block">
+                        <a href="#" class="author-link">Chun-Chieh Liao</a><sup>1†</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Wei-Ting Kuo</a><sup>1†</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">I-Hsuan Hu</a><sup>1</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Yen-Chen Shih</a><sup>2</sup>,
+                    </span>
+                    <br>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Jun-En Ding</a><sup>1</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Feng Liu</a><sup>1</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Fang-Ming Hung</a><sup>3*</sup>
+                    </span>
+                </div>
+
+                <div class="institution">
+                    <sup>1</sup>Stevens Institute of Technology, <sup>2</sup>Northeastern University,<br>
+                    <sup>3</sup>Far Eastern Memorial Hospital, Taiwan<br>
+                    <small><sup>†</sup>Equal Contribution, <sup>*</sup>Corresponding Author</small>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="https://arxiv.org/pdf/2406.18087" class="btn btn-primary">
+                        📄 Paper
+                    </a>
+                    <a href="https://doi.org/10.1145/3627673.3679227" class="btn btn-primary">
+                        🔗 DOI
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=oqmL9DEDFgA" class="btn btn-secondary">
+                        🎥 Demo Video
+                    </a>
+                    <a href="https://arxiv.org/abs/2406.18087" class="btn btn-primary">
+                        📖 arXiv
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abstract Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract-content">
+                <p>
+                    Traditional diagnosis of chronic diseases involves in-person consultations with physicians to
+                    identify the disease. However, there is a lack of research focused on predicting and developing
+                    application systems using clinical notes and blood test values. We collected five years of
+                    Electronic Health Records (EHRs) from Taiwan's hospital database between 2017 and 2021 as an AI
+                    database.
+                </p>
+                <br>
+                <p>
+                    Furthermore, we developed an <strong>EHR-based chronic disease prediction platform</strong>
+                    utilizing Large Language Multimodal Models (LLMMs), successfully integrating with frontend web and
+                    mobile applications for prediction. This prediction platform can also connect to the hospital's
+                    backend database, providing physicians with real-time risk assessment diagnostics.
+                </p>
+                <br>
+                <p>
+                    Our platform represents a significant advancement in making AI-powered chronic disease prediction
+                    accessible through intuitive mobile and web interfaces, bridging the gap between advanced AI
+                    research and practical clinical deployment.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Key Features & Innovations</h2>
+            <p class="section-subtitle">
+                Comprehensive platform combining advanced AI with user-friendly interfaces for clinical deployment
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">Large Language Multimodal Models</h3>
+                    <p class="feature-description">
+                        Integrates clinical notes and blood test data using state-of-the-art language models including
+                        BERT, BiomedBERT, Flan-T5, and GPT-2 for comprehensive disease prediction.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Cross-Platform Accessibility</h3>
+                    <p class="feature-description">
+                        Native mobile and web applications provide healthcare professionals with real-time access to
+                        patient risk assessments anywhere, anytime.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    <h3 class="feature-title">Hospital Integration</h3>
+                    <p class="feature-description">
+                        Seamlessly connects to hospital backend databases for real-time EHR data processing and
+                        immediate clinical decision support.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Explainable AI</h3>
+                    <p class="feature-description">
+                        Utilizes SHAP values to provide interpretable insights, highlighting key clinical factors
+                        contributing to disease risk predictions.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Real-Time Processing</h3>
+                    <p class="feature-description">
+                        Asynchronous processing architecture ensures fast response times for clinical workflows without
+                        disrupting patient care.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">HIPAA Compliant</h3>
+                    <p class="feature-description">
+                        Secure data handling with de-identified patient records and robust privacy protections for
+                        clinical deployment.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Clinical Performance</h2>
+            <p class="section-subtitle">
+                Validated on 5 years of EHR data from Far Eastern Memorial Hospital (2017-2021)
+            </p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">1.42M</div>
+                    <div class="metric-label">Clinical Notes</div>
+                    <div class="metric-description">Processed for training</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">387K</div>
+                    <div class="metric-label">Lab Results</div>
+                    <div class="metric-description">Laboratory test records</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">1,505</div>
+                    <div class="metric-label">Test Items</div>
+                    <div class="metric-description">Different lab parameters</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">0.83</div>
+                    <div class="metric-label">Best F1 Score</div>
+                    <div class="metric-description">Heart disease prediction</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">0.70</div>
+                    <div class="metric-label">Diabetes F1</div>
+                    <div class="metric-description">Using GPT-2 backbone</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">Disease Types</div>
+                    <div class="metric-description">Diabetes, Heart Disease, Hypertension</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Architecture -->
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title">System Architecture</h2>
+            <p class="section-subtitle">
+                Modern cloud-based architecture designed for scalability and clinical integration
+            </p>
+
+            <div class="architecture-overview">
+                <div class="architecture-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Data Collection</div>
+                        <div class="step-description">EHR data preprocessing and physician annotation with comprehensive
+                            quality checks</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Multimodal Fusion</div>
+                        <div class="step-description">Integration of clinical notes and laboratory values using
+                            attention mechanisms</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Model Training</div>
+                        <div class="step-description">Large language models fine-tuned for medical domain with
+                            multimodal capabilities</div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Platform Deployment</div>
+                        <div class="step-description">React frontend, Django backend with PostgreSQL database on AWS
+                            infrastructure</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Citation Section -->
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Citation</h2>
+            <div class="citation-box">
+                <pre>
+@inproceedings{liao2024ehr,
+  title={EHR-Based Mobile and Web Platform for Chronic Disease Risk Prediction Using Large Language Multimodal Models},
+  author={Liao, Chun-Chieh and Kuo, Wei-Ting and Hu, I-Hsuan and Shih, Yen-Chen and Ding, Jun-En and Liu, Feng and Hung, Fang-Ming},
+  booktitle={Proceedings of the 33rd ACM International Conference on Information and Knowledge Management},
+  pages={4404--4408},
+  year={2024},
+  publisher={ACM},
+  doi={10.1145/3627673.3679227},
+  url={https://arxiv.org/abs/2406.18087}
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>
+                    This EHR-based platform represents a significant advancement in making AI-powered chronic disease
+                    prediction accessible through intuitive mobile and web interfaces, bridging the gap between advanced
+                    multimodal AI research and practical clinical deployment for real-world healthcare scenarios.
+                </p>
+                <p style="margin-top: 1.5rem;">
+                    <a href="https://arxiv.org/abs/2406.18087" class="footer-link">📄 arXiv Paper</a> |
+                    <a href="https://doi.org/10.1145/3627673.3679227" class="footer-link">🔗 ACM Digital Library</a> |
+                    <a href="https://www.youtube.com/watch?v=oqmL9DEDFgA" class="footer-link">🎥 Demo Video</a> |
+                    <a href="mailto:cliao9@stevens.edu" class="footer-link">📧 Contact</a>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                    CIKM'24 • Stevens Institute of Technology • Far Eastern Memorial Hospital
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Copy citation to clipboard
+        function copyToClipboard() {
+            const citationText = document.getElementById('citation-text').textContent;
+            navigator.clipboard.writeText(citationText).then(function () {
+                const button = document.querySelector('.copy-button');
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(function () {
+                    button.textContent = originalText;
+                    button.style.background = '#0ea5e9';
+                }, 2000);
+            });
+        }
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections for animation
+        document.querySelectorAll('.architecture-card, .metric-card, .dataset-card, .method-diagram').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Add hover effects for metric cards
+        document.querySelectorAll('.metric-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.borderColor = '#10b981';
+                this.querySelector('.metric-value').style.color = '#0ea5e9';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.borderColor = '#e2e8f0';
+                this.querySelector('.metric-value').style.color = '#10b981';
+            });
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', function () {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+            hero.style.backgroundPosition = `center ${rate}px`;
+        });
+    </script>
+</body>
+
+</html>

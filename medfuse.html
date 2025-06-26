@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description"
+        content="MEDFuse: Multimodal EHR Data Fusion with Masked Lab-Test Modeling and Large Language Models">
+    <meta property="og:title"
+        content="MEDFuse: Multimodal EHR Data Fusion with Masked Lab-Test Modeling and Large Language Models" />
+    <meta property="og:description"
+        content="A comprehensive multimodal framework for EHR data fusion that combines masked lab-test modeling with large language models" />
+    <meta property="og:url" content="#" />
+    <meta property="og:image" content="static/images/medfuse_banner.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:title" content="MEDFuse: Multimodal EHR Data Fusion">
+    <meta name="twitter:description"
+        content="Revolutionary framework combining structured lab tests and unstructured clinical notes for enhanced healthcare predictions">
+    <meta name="twitter:image" content="static/images/medfuse_twitter.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="keywords"
+        content="Multimodal EHR, Electronic Health Records, Lab Test Modeling, Large Language Models, Clinical Prediction, Healthcare AI, Medical Informatics">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>MEDFuse: Multimodal EHR Data Fusion with Masked Lab-Test Modeling and Large Language Models</title>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0ea5e9;
+            --secondary-color: #1e293b;
+            --accent-color: #10b981;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --gradient-1: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            --gradient-2: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-3: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            --gradient-medical: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-1);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="medical" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="white" opacity="0.1"/><rect x="23" y="15" width="4" height="20" fill="white" opacity="0.1"/><rect x="15" y="23" width="20" height="4" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23medical)"/></svg>');
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.1;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .authors {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .author-link {
+            color: #e0f2fe;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .author-link:hover {
+            border-bottom-color: #e0f2fe;
+        }
+
+        .institution {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-primary);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Conference Badge */
+        .conference-badge {
+            background: var(--gradient-2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin: 1.5rem 0;
+            display: inline-block;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-light {
+            background: var(--bg-secondary);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Abstract Section */
+        .abstract-content {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* Architecture Section */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .architecture-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .architecture-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-medical);
+        }
+
+        .architecture-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient-medical);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 16px rgba(6, 182, 212, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Results Section */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .metric-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .metric-description {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        /* Method Visualization */
+        .method-diagram {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            margin: 3rem 0;
+        }
+
+        .method-diagram img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        /* Dataset Section */
+        .dataset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .dataset-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .dataset-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dataset-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Citation Section */
+        .citation-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.2rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 220px;
+                justify-content: center;
+            }
+
+            .architecture-grid,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <!-- FEMH Logo -->
+                <img src="static/images/femh_logo.png" alt="FEMH Logo" style="height: 200px;">
+                <h1 class="title">MEDFuse</h1>
+                <p class="subtitle">Multimodal EHR Data Fusion with Masked Lab-Test Modeling and Large Language Models
+                </p>
+
+                <!-- Conference Badge -->
+                <div class="conference-badge">
+                    🏆 <strong>CIKM'24</strong> | ACM International Conference on Information and Knowledge Management
+                </div>
+
+                <div class="authors">
+                    <span class="author-block">
+                        <a href="#" class="author-link">Phan Nguyen Minh Thao</a><sup>1*</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Cong-Tinh Dao</a><sup>1*</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Chenwei Wu</a><sup>2</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Jian-Zhe Wang</a><sup>1</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Shun Liu</a><sup>3</sup>,
+                    </span>
+                    <br>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Jun-En Ding</a><sup>4</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">David Restrepo</a><sup>5</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Feng Liu</a><sup>4</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Fang-Ming Hung</a><sup>6</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="#" class="author-link">Wen-Chih Peng</a><sup>1</sup>
+                    </span>
+                </div>
+
+                <div class="institution">
+                    <sup>1</sup>National Yang Ming Chiao Tung University, <sup>2</sup>University of Michigan,<br>
+                    <sup>3</sup>Shanghai University of Finance and Economics, <sup>4</sup>Stevens Institute of
+                    Technology,<br>
+                    <sup>5</sup>Massachusetts Institute of Technology, <sup>6</sup>Far Eastern Memorial Hospital<br>
+                    <small><sup>*</sup>Equal Contribution</small>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="https://arxiv.org/pdf/2407.12309" class="btn btn-primary">
+                        📄 Paper
+                    </a>
+                    <a href="https://doi.org/10.1145/3627673.3679962" class="btn btn-primary">
+                        🔗 DOI
+                    </a>
+                    <a href="https://arxiv.org/abs/2407.12309" class="btn btn-primary">
+                        📖 arXiv
+                    </a>
+                    <a href="#citation" class="btn btn-secondary">
+                        📋 Citation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abstract Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract-content">
+                <p>
+                    Electronic Health Records (EHRs) are multimodal by nature, consisting of structured tabular features
+                    like lab tests and unstructured clinical notes. In real-life clinical practice, doctors use
+                    complementary multimodal EHR data sources to get a clearer picture of patients' health and support
+                    clinical decision-making. However, most EHR predictive models do not reflect these procedures, as
+                    they either focus on a single modality or overlook the inter-modality interactions and redundancy.
+                </p>
+                <br>
+                <p>
+                    In this work, we propose <strong>MEDFuse</strong>, a Multimodal EHR Data Fusion framework that
+                    incorporates masked lab-test modeling and large language models (LLMs) to effectively integrate
+                    structured and unstructured medical data. MEDFuse leverages multimodal embeddings extracted from two
+                    sources: LLMs fine-tuned on free clinical text and masked tabular transformers trained on structured
+                    lab test results.
+                </p>
+                <br>
+                <p>
+                    We design a disentangled transformer module, optimized by a mutual information loss to decouple
+                    modality-specific and modality-shared information and extract useful joint representation from the
+                    noise and redundancy present in clinical notes. Through comprehensive validation on the public
+                    MIMIC-III dataset and the in-house FEMH dataset, MEDFuse demonstrates great potential in advancing
+                    clinical predictions, achieving over <strong>90% F1 score</strong> in the 10-disease multi-label
+                    classification task.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method Section -->
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Methodology</h2>
+            <p class="section-subtitle">
+                A comprehensive framework that effectively combines structured lab tests and unstructured clinical notes
+            </p>
+
+            <div class="architecture-grid">
+                <div class="architecture-card">
+                    <div class="card-icon">🧬</div>
+                    <h3 class="card-title">Multimodal Embedding Extraction</h3>
+                    <p class="card-description">
+                        Fine-tuned LLMs process unstructured clinical notes while masked lab-test modeling handles
+                        structured tabular data, creating rich semantic representations for each modality.
+                    </p>
+                </div>
+
+                <div class="architecture-card">
+                    <div class="card-icon">🔬</div>
+                    <h3 class="card-title">Masked Lab-Test Modeling (MLTM)</h3>
+                    <p class="card-description">
+                        Extends Masked Autoencoders framework to reconstruct masked lab test components, using
+                        asymmetric encoder-decoder architecture to extract meaningful representations from structured
+                        data.
+                    </p>
+                </div>
+
+                <div class="architecture-card">
+                    <div class="card-icon">🤖</div>
+                    <h3 class="card-title">Disentangled Transformer</h3>
+                    <p class="card-description">
+                        Optimized with mutual information loss to separate modality-specific and modality-shared
+                        information, extracting useful joint representations while reducing noise and redundancy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Results -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Performance Results</h2>
+            <p class="section-subtitle">
+                MEDFuse significantly outperforms baseline approaches across all evaluation metrics
+            </p>
+
+            <div class="results-grid">
+                <div class="metric-card">
+                    <div class="metric-value">95.35%</div>
+                    <div class="metric-label">Training Accuracy</div>
+                    <div class="metric-description">MIMIC-III Dataset</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">92.16%</div>
+                    <div class="metric-label">F1 Macro Score</div>
+                    <div class="metric-description">Best performance achieved</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">93.75%</div>
+                    <div class="metric-label">Precision</div>
+                    <div class="metric-description">Training performance</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">92.17%</div>
+                    <div class="metric-label">Recall</div>
+                    <div class="metric-description">Training performance</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">1.49%</div>
+                    <div class="metric-label">Improvement</div>
+                    <div class="metric-description">Over Medical-Llama3-8B</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">93.11%</div>
+                    <div class="metric-label">FEMH Accuracy</div>
+                    <div class="metric-description">Real-world validation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Datasets Section -->
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Experimental Validation</h2>
+            <p class="section-subtitle">
+                Comprehensive evaluation on both public and real-world clinical datasets
+            </p>
+
+            <div class="dataset-grid">
+                <div class="dataset-card">
+                    <h3 class="dataset-title">MIMIC-III Dataset</h3>
+                    <p>Publicly available critical care database used for benchmarking medical AI systems. Focused on
+                        top 10 most prevalent conditions including hypertension, cardiac arrhythmias, and diabetes.</p>
+                    <div class="dataset-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">10</div>
+                            <div class="stat-label">Diseases</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Multi-label</div>
+                            <div class="stat-label">Classification</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dataset-card">
+                    <h3 class="dataset-title">FEMH Dataset</h3>
+                    <p>Real-world EHR data from Far Eastern Memorial Hospital (2017-2021) including clinical notes, lab
+                        results, and comprehensive patient records.</p>
+                    <div class="dataset-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">1.42M</div>
+                            <div class="stat-label">Clinical Notes</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">387K</div>
+                            <div class="stat-label">Lab Results</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ablation Study Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Ablation Study</h2>
+            <p class="section-subtitle">
+                Each component contributes significantly to the overall model performance
+            </p>
+
+            <div class="results-grid">
+                <div class="metric-card">
+                    <div class="metric-value">-4.81%</div>
+                    <div class="metric-label">Without MLTM & LABTEXT</div>
+                    <div class="metric-description">Precision drop in training</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">-29.76%</div>
+                    <div class="metric-label">Without MLTM & TEXT</div>
+                    <div class="metric-description">Most significant drop</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">-17.14%</div>
+                    <div class="metric-label">Without TEXT Only</div>
+                    <div class="metric-description">Clinical notes importance</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">-0.46%</div>
+                    <div class="metric-label">Without Disentangled Transformer</div>
+                    <div class="metric-description">Fusion module contribution</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Citation Section -->
+    <section class="section section-light" id="citation">
+        <div class="container">
+            <h2 class="section-title">Citation</h2>
+            <div class="citation-box">
+                <button class="copy-button" onclick="copyToClipboard()">Copy</button>
+                <pre id="citation-text">@article{phan2024medfuse,
+  title={MEDFuse: Multimodal EHR Data Fusion with Masked Lab-Test Modeling and Large Language Models},
+  author={Phan, Thao Minh Nguyen and Dao, Cong-Tinh and Wu, Chenwei and Wang, Jian-Zhe and Liu, Shun and Ding, Jun-En and Restrepo, David and Liu, Feng and Hung, Fang-Ming and Peng, Wen-Chih},
+  journal={Proceedings of the 33rd ACM International Conference on Information and Knowledge Management},
+  year={2024},
+  publisher={ACM},
+  doi={10.1145/3627673.3679962}
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>
+                    MEDFuse represents a significant advancement in multimodal EHR analysis, bridging the gap between
+                    structured lab data and unstructured clinical notes for enhanced healthcare predictions and
+                    decision-making.
+                </p>
+                <p style="margin-top: 1.5rem;">
+                    <a href="https://arxiv.org/abs/2407.12309" class="footer-link">📄 arXiv Paper</a> |
+                    <a href="https://doi.org/10.1145/3627673.3679962" class="footer-link">🔗 ACM Digital Library</a> |
+                    <a href="mailto:pnmthaoct@gmail.com" class="footer-link">📧 Contact</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Copy citation to clipboard
+        function copyToClipboard() {
+            const citationText = document.getElementById('citation-text').textContent;
+            navigator.clipboard.writeText(citationText).then(function () {
+                const button = document.querySelector('.copy-button');
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(function () {
+                    button.textContent = originalText;
+                    button.style.background = '#0ea5e9';
+                }, 2000);
+            });
+        }
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections for animation
+        document.querySelectorAll('.architecture-card, .metric-card, .dataset-card, .method-diagram').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Add hover effects for metric cards
+        document.querySelectorAll('.metric-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.borderColor = '#10b981';
+                this.querySelector('.metric-value').style.color = '#0ea5e9';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.borderColor = '#e2e8f0';
+                this.querySelector('.metric-value').style.color = '#10b981';
+            });
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', function () {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+            hero.style.backgroundPosition = `center ${rate}px`;
+        });
+    </script>
+</body>
+
+</html>
