@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="MedPlan: A Two-Stage RAG-Based System for Personalized Medical Plan Generation">
+  <meta property="og:title" content="MedPlan: A Two-Stage RAG-Based System for Personalized Medical Plan Generation" />
+  <meta property="og:description"
+    content="Novel framework that structures LLM reasoning to align with real-life clinician workflows using SOAP methodology" />
+  <meta property="og:url" content="https://justinhsu1019.github.io/MedPlan" />
+  <meta property="og:image" content="static/images/medplan_banner.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:title" content="MedPlan: AI-Powered Medical Treatment Planning">
+  <meta name="twitter:description"
+    content="Two-stage RAG-based system for personalized medical plan generation following SOAP methodology">
+  <meta name="twitter:image" content="static/images/medplan_twitter.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="keywords"
+    content="Medical AI, SOAP methodology, Treatment Planning, Large Language Models, RAG, Electronic Health Records, Clinical Decision Support">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>MedPlan: A Two-Stage RAG-Based System for Personalized Medical Plan Generation</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #0f172a;
+      --accent-color: #06b6d4;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --border-color: #e2e8f0;
+      --success-color: #10b981;
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--gradient-1);
+      color: white;
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .authors {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .author-link {
+      color: #e2e8f0;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+
+    .author-link:hover {
+      border-bottom-color: #e2e8f0;
+    }
+
+    .institution {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-primary:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-primary);
+      color: var(--primary-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-secondary);
+      transform: translateY(-2px);
+    }
+
+    /* Section Styling */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-light {
+      background: var(--bg-secondary);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Abstract Section */
+    .abstract-content {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    /* Architecture Section */
+    .architecture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .architecture-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .architecture-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-3);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .card-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Results Section */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .metric-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .metric-card:hover {
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--success-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Demo Section */
+    .demo-container {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+    }
+
+    .demo-image {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Citation Section */
+    .citation-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      overflow-x: auto;
+      margin-top: 2rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--secondary-color);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .footer-content {
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    .footer-link {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .title {
+        font-size: 2.5rem;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 200px;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <!-- FEMH Logo -->
+        <img src="static/images/femh_logo.png" alt="FEMH Logo" style="height: 200px;">
+
+        <h1 class="title">MedPlan</h1>
+        <p class="subtitle">A Two-Stage RAG-Based System for Personalized Medical Plan Generation</p>
+
+        <!-- ACL Acceptance Badge -->
+        <div style="margin: 1.5rem 0;">
+          <span
+            style="background: rgba(255, 255, 255, 0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 500; border: 1px solid rgba(255, 255, 255, 0.3);">
+            📄 <strong>Accepted to ACL'25 Industry Track</strong> | Acceptance Rate: ~25.1% | Average Rating: 7.00 [Min:
+            6, Max: 8]
+          </span>
+        </div>
+
+        <div class="authors">
+          <span class="author-block">
+            <a href="#" class="author-link">Hsin-Ling Hsu</a><sup>1*</sup>,
+          </span>
+          <span class="author-block">
+            <a href="#" class="author-link">Cong-Tinh Dao</a><sup>2,3*</sup>,
+          </span>
+          <span class="author-block">
+            <a href="#" class="author-link">Luning Wang</a><sup>4</sup>,
+          </span>
+          <span class="author-block">
+            <a href="#" class="author-link">Zitao Shuai</a><sup>4</sup>,
+          </span>
+          <span class="author-block">
+            <a href="#" class="author-link">Chenwei Wu</a><sup>4</sup>
+          </span>
+          <br>
+          <span style="font-size: 0.9rem; opacity: 0.8;">and 9 more authors</span>
+        </div>
+
+        <div class="institution">
+          <sup>1</sup>National Chengchi University, <sup>2</sup>National Yang Ming Chiao Tung University,<br>
+          <sup>3</sup>Can Tho University, <sup>4</sup>University of Michigan<br>
+          <small><sup>*</sup>Equal Contribution</small>
+        </div>
+
+        <div class="action-buttons">
+          <a href="https://arxiv.org/pdf/2503.17900" class="btn btn-primary">
+            📄 Paper
+          </a>
+          <a href="https://github.com/JustinHsu1019/MedPlan" class="btn btn-primary">
+            💻 Code
+          </a>
+          <a href="http://justforpublicuse.com/" target="_blank" class="btn btn-secondary">
+            🚀 Live Demo
+          </a>
+          <a href="https://arxiv.org/abs/2503.17900" class="btn btn-primary">
+            📖 arXiv
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Abstract</h2>
+      <div class="abstract-content">
+        <p>
+          Despite recent success in applying large language models (LLMs) to electronic health records (EHR), most
+          systems focus primarily on assessment rather than treatment planning. We identify three critical limitations
+          in current approaches: they generate treatment plans in a single pass rather than following the sequential
+          reasoning process used by clinicians; they rarely incorporate patientspecific historical context; and they
+          fail to effectively distinguish between subjective and objective clinical information.
+        </p>
+        <br>
+        <p>
+          Motivated by the SOAP methodology (Subjective, Objective, Assessment, Plan), we introduce <strong>MedPlan</strong>, a novel
+          framework that structures LLM reasoning to align with real-life clinician workflows. Our approach employs a
+          two-stage architecture that first generates a clinical assessment based on patient symptoms and objective
+          data, then formulates a structured treatment plan informed by this assessment and enriched with
+          patient-specific information through retrievalaugmented generation.
+        </p>
+        <br>
+        <p>
+          Comprehensive evaluation demonstrates that our method significantly outperforms baseline approaches in both
+          assessment accuracy and treatment plan quality.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Section -->
+  <section class="section section-light">
+    <div class="container">
+      <h2 class="section-title">SOAP-Inspired Architecture</h2>
+      <p class="section-subtitle">
+        Our two-stage framework mirrors the clinical process used by healthcare professionals
+      </p>
+
+      <div style="text-align: center; margin-top: 3rem;">
+        <img src="static/images/medplan_method.png" alt="MedPlan methodology framework"
+          style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+      </div>
+
+      <div class="architecture-grid">
+        <div class="architecture-card">
+          <div class="card-icon">🩺</div>
+          <h3 class="card-title">Stage 1: Assessment Generation</h3>
+          <p class="card-description">
+            Generates clinical assessment (A) based on patient symptoms (S) and objective data (O), incorporating both
+            self-history and cross-patient references through RAG.
+          </p>
+        </div>
+
+        <div class="architecture-card">
+          <div class="card-icon">📋</div>
+          <h3 class="card-title">Stage 2: Plan Generation</h3>
+          <p class="card-description">
+            Formulates structured treatment plan (P) informed by the generated assessment and enriched with
+            patient-specific context and similar case references.
+          </p>
+        </div>
+
+        <div class="architecture-card">
+          <div class="card-icon">🔍</div>
+          <h3 class="card-title">RAG Enhancement</h3>
+          <p class="card-description">
+            Leverages patient history and cross-patient similarities using hybrid retrieval with BM25 and semantic
+            search, refined by cross-encoder re-ranking.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Performance Results</h2>
+      <p class="section-subtitle">
+        MedPlan significantly outperforms baseline approaches across all evaluation metrics
+      </p>
+
+      <div style="text-align: center; margin-top: 3rem;">
+        <img src="static/images/medplan_eval.png" alt="MedPlan Performance Evaluation Results"
+          style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Section -->
+  <section class="section section-light" id="demo">
+    <div class="container">
+      <h2 class="section-title">Clinical Application Demo</h2>
+      <p class="section-subtitle">
+        Interactive system for real-world clinical deployment
+      </p>
+
+      <div class="demo-container">
+        <a href="https://justforpublicuse.com" target="_blank" rel="noopener noreferrer">
+          <img src="static/images/medplan_demo.png" alt="MedPlan DEMO"
+            style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        </a>
+        <div style="margin-top: 2rem; text-align: center;">
+          <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+            The system provides physicians with an intuitive interface for generating structured, evidence-based
+            treatment plans
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Citation Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Citation</h2>
+      <div class="citation-box">
+        <pre>
+@misc{hsu2025medplanatwostageragbasedpersonalized,
+  title={MedPlan: A Two-Stage RAG-Based System for Personalized Medical Plan Generation}, 
+  author={Hsin-Ling Hsu and Cong-Tinh Dao and Luning Wang and Zitao Shuai and Thao Nguyen Minh Phan and Jun-En Ding and Chun-Chieh Liao and Pengfei Hu and Xiaoxue Han and Chih-Ho Hsu and Dongsheng Luo and Wen-Chih Peng and Feng Liu and Fang-Ming Hung and Chenwei Wu},
+  year={2025},
+  eprint={2503.17900},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2503.17900}
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>
+          This page was built using modern web technologies and is inspired by academic project page best practices.
+          The MedPlan system represents a significant advancement in AI-powered clinical decision support.
+        </p>
+        <p style="margin-top: 1rem;">
+          <a href="https://github.com/JustinHsu1019/MedPlan" class="footer-link">🔗 GitHub Repository</a> |
+          <a href="https://arxiv.org/abs/2503.17900" class="footer-link">📄 arXiv Paper</a> |
+          <a href="mailto:chenweiwu99@gmail.com" class="footer-link">📧 Contact</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all cards and sections for animation
+    document.querySelectorAll('.architecture-card, .metric-card, .demo-container').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+
+</html>
