@@ -260,38 +260,72 @@
         /* Team Section */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
             margin-bottom: 4rem;
+            justify-items: center;
         }
 
-        .team-card {
+        .team-member {
             background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 320px;
         }
 
-        .team-card:hover {
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+
+        .team-member:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px -3px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.15);
         }
 
         .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            border: 4px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .team-member:hover .team-avatar {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .team-avatar img {
             width: 100%;
-            height: 200px;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-avatar-placeholder {
+            width: 100%;
+            height: 100%;
             background: var(--gradient-2);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
+            font-size: 3rem;
             color: white;
-        }
-
-        .team-info {
-            padding: 1.5rem;
         }
 
         .team-name {
@@ -301,16 +335,31 @@
             color: var(--text-primary);
         }
 
-        .team-role {
-            color: var(--primary-color);
-            font-weight: 500;
-            margin-bottom: 1rem;
+        .team-position {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
         }
 
-        .team-quote {
-            color: var(--text-secondary);
-            font-style: italic;
-            line-height: 1.5;
+        .team-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .team-link:hover {
+            background: #008c5a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 168, 107, 0.3);
         }
 
         /* Publications Section */
@@ -442,6 +491,25 @@
             .team-grid {
                 grid-template-columns: 1fr;
             }
+
+            .team-grid {
+                gap: 2rem;
+            }
+
+            .team-member {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .team-avatar-placeholder {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
@@ -457,7 +525,7 @@
                 </a>
                 <ul class="nav-menu">
                     <li><a href="#about" class="nav-link">About</a></li>
-                    <!-- <li><a href="#team" class="nav-link">Team</a></li> -->
+                    <li><a href="#team" class="nav-link">Team</a></li>
                     <li><a href="#publications" class="nav-link">Publications</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
@@ -528,49 +596,101 @@
     </section>
 
     <!-- Team Section -->
-    <!-- <section class="section section-light" id="team">
-    <div class="container">
-      <h2 class="section-title">Our Research Team</h2>
-      <p class="section-subtitle">
-        Meet the dedicated researchers driving innovation in medical AI
-      </p>
-      
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="team-avatar">👨‍⚕️</div>
-          <div class="team-info">
-            <h3 class="team-name">Dr. Fang-Ming Hung</h3>
-            <p class="team-role">Principal Investigator & Director</p>
-            <p class="team-quote">
-              "Our mission is to bridge the gap between cutting-edge AI research and practical clinical applications. We believe AI should augment, not replace, the human touch in medicine."
+    <section class="section section-light" id="team">
+        <div class="container">
+            <h2 class="section-title">Our Research Team</h2>
+            <p class="section-subtitle">
+                Meet the dedicated researchers driving innovation in medical AI
             </p>
-          </div>
-        </div>
-        
-        <div class="team-card">
-          <div class="team-avatar">👩‍🔬</div>
-          <div class="team-info">
-            <h3 class="team-name">Dr. Liu Mei-Ling</h3>
-            <p class="team-role">Senior Research Scientist</p>
-            <p class="team-quote">
-              "Machine learning has the potential to revolutionize how we analyze medical data. My focus is on developing interpretable AI models that physicians can trust and understand."
-            </p>
-          </div>
-        </div>
-        
-        <div class="team-card">
-          <div class="team-avatar">👨‍💻</div>
-          <div class="team-info">
-            <h3 class="team-name">Dr. Wang Kai-Jun</h3>
-            <p class="team-role">AI Systems Engineer</p>
-            <p class="team-quote">
-              "Building robust AI systems for healthcare requires not just technical excellence, but deep understanding of clinical workflows. Every line of code we write has the potential to impact patient lives."
-            </p>
-          </div>
-        </div>
-      </div>
+            
+            <div class="team-grid">
+<!-- Team Member 1 -->
+<div class="team-member">
+    <div class="team-avatar">
+        <img src="static/images/fang-ming-hung.jpg" alt="Dr. Fang-Ming Hung" class="team-avatar-img">
     </div>
-  </section> -->
+    <h3 class="team-name">Dr. Fang-Ming Hung</h3>
+    <a href="https://www.nycu.edu.tw/ihha/en/app/artwebsite/view?module=artwebsite&id=20140&serno=3a7aa8cd-d3bd-4186-9cea-6cbfc9c58bd6" class="team-link">
+        🔗 View Profile
+    </a>
+</div>
+
+<!-- Team Member 2 -->
+<div class="team-member">
+    <div class="team-avatar">
+        <img src="static/images/jun-en-ding.jpg" alt="Jun-En Ding" class="team-avatar-img">
+    </div>
+    <h3 class="team-name">Jun-En Ding</h3>
+    <a href="https://www.jun-ending.com/" class="team-link">
+        🔗 View Profile
+    </a>
+</div>
+
+<!-- Team Member 3 -->
+<div class="team-member">
+    <div class="team-avatar">
+        <img src="static/images/hsin-ling-hsu.jpg" alt="Hsin-Ling Hsu" class="team-avatar-img">
+    </div>
+    <h3 class="team-name">Hsin-Ling Hsu</h3>
+    <a href="https://justin-code.com/cv/CV_en.pdf" class="team-link">
+        🔗 View Profile
+    </a>
+</div>
+
+<!-- Team Member 4 -->
+<div class="team-member">
+    <div class="team-avatar">
+        <img src="static/images/chun-chieh-liao.jpg" alt="Chun-Chieh Liao" class="team-avatar-img">
+    </div>
+    <h3 class="team-name">Chun-Chieh Liao</h3>
+    <a href="https://www.linkedin.com/in/jack-liao-ba4685231/" class="team-link">
+        🔗 View Profile
+    </a>
+</div>
+
+<!-- Team Member 5 -->
+<div class="team-member">
+    <div class="team-avatar">
+        <img src="static/images/feng-liu.jpg" alt="Dr. Feng Liu" class="team-avatar-img">
+    </div>
+    <h3 class="team-name">Dr. Feng Liu</h3>
+    <a href="https://www.stevens.edu/profile/fliu22" class="team-link">
+        🔗 View Profile
+    </a>
+</div>
+
+<!-- Team Member 6 -->
+<div class="team-member">
+    <div class="team-avatar">
+        <img src="static/images/jin-chun-zhi.jpg" alt="金純之" class="team-avatar-img">
+    </div>
+    <h3 class="team-name">金純之</h3>
+</div>
+
+<!-- Team Member 7 -->
+<div class="team-member">
+    <div class="team-avatar">
+        <img src="static/images/chih-ho-hsu.jpg" alt="Dr. Chih-Ho Hsu" class="team-avatar-img">
+    </div>
+    <h3 class="team-name">Dr. Chih-Ho Hsu</h3>
+    <a href="https://www.linkedin.com/in/chih-ho-hsu-431700101/?originalSubdomain=tw" class="team-link">
+        🔗 View Profile
+    </a>
+</div>
+
+<!-- Team Member 8 -->
+<div class="team-member">
+    <div class="team-avatar">
+        <img src="static/images/yaxi-luo.jpg" alt="Yaxi Luo" class="team-avatar-img">
+    </div>
+    <h3 class="team-name">Yaxi Luo</h3>
+    <a href="https://www.linkedin.com/in/yaxiluo936/" class="team-link">
+        🔗 View Profile
+    </a>
+</div>
+            </div>
+        </div>
+    </section>
 
     <!-- Publications Section -->
     <section class="section" id="publications">
@@ -701,7 +821,7 @@
         }, observerOptions);
 
         // Observe all cards for animation
-        document.querySelectorAll('.info-card, .team-card, .publication-card').forEach(el => {
+        document.querySelectorAll('.info-card, .team-member, .publication-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
